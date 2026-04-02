@@ -41,10 +41,12 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`\n🚀 Bonjour Team API running on http://localhost:${PORT}`);
-  console.log(`📋 Health: http://localhost:${PORT}/health\n`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => {
+    console.log(`\n🚀 Bonjour Team API running on http://localhost:${PORT}`);
+    console.log(`📋 Health: http://localhost:${PORT}/health\n`);
+  });
+}
 
 module.exports = app;
